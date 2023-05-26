@@ -1,0 +1,128 @@
+{% extends 'shared/base.html' %}
+{% load thumbnail %}
+{% load render_partial %}
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <body class="single-post right-sidebar">
+        <div id="content" class="site-content" tabindex="-1">
+                <div class="container">
+
+                    <br><br><br><br><br>
+
+                    <div id="primary" class="content-area">
+                        <main id="main" class="site-main">
+                            <article class="post type-post status-publish format-gallery has-post-thumbnail hentry">
+                                <div class="media-attachment">
+                                    <div class="media-attachment-gallery">
+                                        <div class=" ">
+                                            <div class="item">
+                                                <figure>
+                                                    {% thumbnail article.banner '870x460' crop='center' as im %}
+                                                        <img src="{{ im.url }}" class="attachment-post-thumbnail size-post-thumbnail" alt="1">
+                                                    {% endthumbnail %}
+                                                </figure>
+                                            </div><!-- /.item -->
+                                        </div>
+                                    </div><!-- /.media-attachment-gallery -->
+                                </div>
+
+                                <header class="entry-header">
+                                    <h1 class="entry-title" itemprop="name headline">{{ article.title }}<span class="comments-link"><a href="#comments">Leave a comment</a></span></h1>
+                                    <div class="entry-meta">
+                                        <span class="cat-links"><a href="#" rel="category tag">{{ article.category.url_title }}</a></span>
+                                        <span class="posted-on"><time class="entry-date published" datetime="2016-03-04T07:34:20+00:00">{{ article.date.isoformat}}</time> <time class="updated" datetime="2016-03-04T18:46:11+00:00" itemprop="datePublished"></time></span>
+                                    </div>
+                                </header><!-- .entry-header -->
+                                <div class="entry-content" itemprop="articleBody">
+                                    <p class="highlight">{{ article.title }}</p>
+                                    <p>{{ article.text }}</p>
+                                </div><!-- .entry-content -->
+                            </article>
+                            <div class="post-author-info">
+                                <div class="media">
+                                    <div class="media-left media-middle">
+                                        {% thumbnail article.auther.avatar '100x100' as image %}
+                                            <a href="#"><img src="{{ image.url }}" alt=""></a>
+                                        {% endthumbnail %}
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{ article.auther }}</h4>
+                                        <p>{{ article.auther.about_user }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <nav class="navigation post-navigation">
+                                <h2 class="screen-reader-text">Post navigation</h2>
+                            </nav>
+                            <div class="comments-area" id="comments">
+                                <h2 class="comments-title">{{ comments.count }} Comments</h2>
+                                <ol class="comment-list">
+                                    {% for cm in comments %}
+                                        <li id="comment-396" class="comment even thread-even depth-1">
+                                        <div class="media">
+                                            <div class="gravatar-wrapper media-left">
+                                                <img class="avatar avatar-100 photo" src="/static/images/blog/avatar.jpg" alt="">
+                                            </div>
+                                            <div class="comment-body media-body">
+                                                <div class="comment-content" id="div-comment-396">
+                                                    <p>{{ cm.message }}</p>
+                                                </div>
+                                                <div class="comment-meta" id="div-comment-meta-396">
+                                                    <div class="author vcard">
+                                                        <cite class="fn media-heading">{{ cm.auther }}</cite>
+                                                    </div>
+                                                    <div class="date">
+                                                        <a class="comment-date" href="#">{{ cm.create_date.isoformat }}</a>
+                                                    </div>
+                                                    <div class="reply">
+                                                        <a aria-label="Reply to John Doe" onclick="" href="#" class="comment-reply-link" rel="nofollow">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.comment-body -->
+                                        </div><!-- /.media -->
+                                    </li><!-- #comment-## -->
+                                    {% endfor %}
+
+                                </ol><!-- .comment-list -->
+
+                                <div class="comment-respond" id="respond">
+                                    <h3 class="comment-reply-title" id="reply-title">Leave a Reply </h3>
+                                    <form action="{% url 'blog-detail-page' article.pk %}" method="post">
+                                        {% csrf_token %}
+                                        {{ forms.as_p }}
+
+
+                                        <button>Sent</button>
+
+                                    </form>
+                                </div><!-- #respond -->
+
+                            </div>
+                        </main><!-- #main -->
+                    </div><!-- #primary -->
+
+                    <div id="sidebar" class="sidebar-blog" role="complementary">
+
+                        <aside class="widget widget_text">
+                            <h3 class="widget-title">About Blog</h3>
+                            <div class="textwidget">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero.</div>
+                        </aside>
+                        {% render_partial 'article.views.article_categories' %}
+                        {% render_partial 'article.views.recent_post' %}
+
+                        <aside id="tag_cloud-2" class="widget widget_tag_cloud">
+                            <h3 class="widget-title">Tags Clouds</h3>
+                            <div class="tagcloud">
+                                {% for tags in article.tags.all %}
+                                    <a href="{% url 'blog-list-by-tag-page' tags.url_title %}" class="" title="10 topics" style="font-size: 22pt;">{{ tags.url_title }}</a>
+                                {% endfor %}
+                            </div>
+                        </aside>
+                    </div>
+                </div><!-- .container -->
+            </div>
+    </body>
+{% endblock %}

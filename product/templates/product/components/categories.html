@@ -1,0 +1,33 @@
+<aside class="widget woocommerce widget_product_categories electro_widget_product_categories">
+
+    <ul class="product-categories category-single">
+        <li class="product_cat">
+            <ul class="show-all-cat">
+                <li class="product_cat">
+                    <span class="show-all-cat-dropdown">
+                        Show All Categories
+                        <span class="child-indicator">
+                            <i class="fa fa-angle-right"></i>
+                        </span>
+                    </span>
+                    <ul style="display: none;">
+                        {% for categories in all_categories %}
+                        <li class="cat-item">
+
+                            <a href="{% url 'product-by-categories-page' categories.url_title %}">
+                                <span class="no-child">
+                                </span>{{ categories.url_title }}
+                            </a>
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</aside>

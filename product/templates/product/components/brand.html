@@ -1,0 +1,12 @@
+<aside class="widget woocommerce widget_layered_nav">
+    <h3 class="widget-title">Brands</h3>
+    <ul>
+        {% for brands in all_brands %}
+            <li style="">
+                <a href="{% url 'product-by-brands-page' brands.url_title %}">{{ brands.url_title }}</a>
+                <span class="count">{{ brands.brand_count }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <p class="maxlist-more"><a href="#">+ Show more</a></p>
+</aside>

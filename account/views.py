@@ -1,0 +1,89 @@
+from django.contrib.auth import login,logout
+from django.http import HttpRequest, Http404, HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.utils.crypto import get_random_string
+from django.views import View
+from account.forms import RegisterForm, LoginForm
+from account.models import User
+
+
+class RegisterView(View):
+
+    def get(self, request):
+        print(request.user.id)
+        print(request.user.username)
+        form = RegisterForm()
+        return render(request, 'account/register.html', context={
+            'form': form
+        })
+
+    def post(self, request: HttpRequest):
+        message = False
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            email = register_form.cleaned_data.get('email')
+            password = register_form.cleaned_data.get("password")
+            user_exists: bool = User.objects.filter(email__iexact=email).exists()
+            if user_exists:
+                register_form.add_error('email', 'ایمیل تکراری است')
+            else:
+                new_user = User(email=email,
+                                is_active=False,
+                                email_activation_code=get_random_string(12),
+                                username=email)
+                new_user.set_password(password)
+                new_user.save()
+                message = True
+                return render(request, 'account/register.html', context={
+                    'msg': message
+                })
+
+        register_form = RegisterForm()
+        return render(request, 'account/register.html', context={
+            'form': register_form,
+            'msg': message
+        })
+
+
+def authentication(request, activation_code):
+    user = User.objects.filter(email_activation_code=activation_code).first()
+    if user is not None:
+        user.is_active = True
+        user.save()
+        return redirect(reverse('index-page'))
+    else:
+        raise Http404
+
+
+class LoginView(View):
+    def get(self, request):
+        login_form = LoginForm()
+        return render(request, 'account/login.html', context={
+            'form': login_form
+        })
+
+    def post(self, request: HttpRequest):
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            email = login_form.cleaned_data.get('email')
+            password = login_form.cleaned_data.get('password')
+            user = User.objects.filter(email__iexact=email).first()
+            if user is not None:
+                if user.check_password(password) and user.is_active:
+                    login(request, user)
+                    return redirect(reverse('index-page'))
+                else:
+                    login_form.add_error('password', 'Wrong Password or Email')
+            else:
+                login_form.add_error('email', 'Wrong Password or Email')
+
+        return render(request, 'account/login.html', context={
+            'form': login_form
+        })
+
+
+def logout_account(request: HttpRequest):
+
+    logout(request)
+    return redirect(reverse('index-page'))

@@ -1,0 +1,18 @@
+{% load thumbnail %}
+<aside class="widget electro_recent_posts_widget"><h3 class="widget-title">Recent Posts</h3>
+    <ul>
+        {% for articles in recent %}
+            <li>
+            <a class="post-thumbnail" href="">
+                {% thumbnail articles.banner '150x150' crop='center' as im %}
+                    <img  src="{{ im.url }}" class="wp-post-image" alt="1">
+                {% endthumbnail %}
+            </a>
+            <div class="post-content">
+                <a class="post-name" href="">{{ articles.title }}</a>
+                <span class="post-date">{{ articles.date.isoformat }}</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</aside>

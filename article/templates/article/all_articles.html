@@ -1,0 +1,76 @@
+{% extends 'shared/base.html' %}
+{% load thumbnail %}
+{% load render_partial %}
+{% block title %}
+    Blogs list
+{% endblock %}
+
+{% block content %}
+    <body class="right-sidebar">
+        <div id="content" class="site-content" tabindex="-1">
+                <div class="container">
+                    <br><br><br><br>
+                    <div id="primary" class="content-area">
+                        <main id="main" class="site-main">
+                            {% for article in articles %}
+                                <article class="post format-standard hentry">
+                                <div class="about author">
+                                    {{ article.auther }}
+                                </div>
+                                    <br>
+                                <div class="media-attachment">
+                                    {% thumbnail article.banner '870x460' crop='center' as im %}
+                                        <img width="870" height="460" src="{{ im.url }}" class="wp-post-image" alt="8">
+                                    {% endthumbnail %}
+                                </div>
+                                <div class="content-body">
+                                    <header class="entry-header">
+                                        <h1 class="entry-title" itemprop="name headline"><a href="" rel="bookmark">{{ article.title }}</a></h1>
+                                        <div class="entry-meta">
+                                            <span class="cat-links"><a href="" rel="category tag">{{ article.category.url_title }}</a></span>
+                                            <span class="posted-on"><time class="entry-date published" datetime="2016-03-01T07:40:25+00:00">{{ article.date.isoformat }}</time> <time class="updated" datetime="2016-03-04T18:46:11+00:00" itemprop="datePublished">March 4, 2016</time></span>
+                                        </div>
+                                    </header><!-- .entry-header -->
+                                    <div class="entry-content" itemprop="articleBody">
+                                        <p></p>
+
+                                    </div><!-- .post-excerpt -->
+                                    <div class="post-readmore"><a href="{% url 'blog-detail-page' article.pk %}" class="btn btn-primary">Read More</a></div>
+                                    <span class="comments-link"><a href="">Leave a comment</a></span>
+                                </div>
+                            </article><!-- #post-## -->
+                            {% endfor %}
+                            <nav class="navigation pagination">
+                                <h2 class="screen-reader-text">Posts navigation</h2>
+                                <div class="nav-links">
+                                    <ul class="page-numbers">
+                                        {% if page_obj.has_previous %}
+                                            <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                        {% endif %}
+                                        {% for pageNum in paginator.page_range  %}
+                                            {% if pageNum == page_obj.number %}
+                                                <li><a class="current" href="?page={{ pageNum }}">{{ pageNum }}</a></li>
+                                                {% else %}
+                                                 <li><a  href="?page={{ pageNum }}">{{ pageNum }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                            <li><a href="?page={{ page_obj.next_page_number}}">Next</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </nav>
+                        </main><!-- #main -->
+                    </div><!-- #primary -->
+                    <div id="sidebar" class="sidebar-blog" role="complementary">
+                        <aside class="widget widget_text">
+                            <h3 class="widget-title">About Blog</h3>
+                            <div class="textwidget">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero.</div>
+                        </aside>
+                        {% render_partial 'article.views.article_categories' %}
+                        {% render_partial 'article.views.recent_post' %}
+                    </div>
+                </div><!-- .container -->
+            </div>
+    </body>
+{% endblock %}

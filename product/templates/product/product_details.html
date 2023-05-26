@@ -1,0 +1,213 @@
+{% extends 'shared/base.html' %}
+{% load thumbnail %}
+{% block title %}
+    {{ products.title }}
+{% endblock %}
+{% block content %}
+    <body class="single-product full-width">
+        <div id="content" class="site-content" tabindex="-1">
+                <div class="container">
+                    <br><br><br><br>
+                    <div id="primary" class="content-area">
+                        <main id="main" class="site-main">
+                            <div class="product">
+                                <div class="single-product-wrapper">
+                                    <div class="product-images-wrapper">
+                                        <span class="onsale">Sale!</span>
+                                        <div class="images electro-gallery">
+                                            <div class="thumbnails-single owl-carousel owl-loaded owl-drag">
+                                            <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1566px;">
+                                                <div class="owl-item active" style="width: 261px;">
+                                                    <a href="images/single-product/s1-1.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+                                                        {% thumbnail products.image '600x600' crop='center' as im %}
+                                                            <img src="{{ im.url }}" class="wp-post-image" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                </div>
+                                                <div class="owl-item" style="width: 261px;">
+
+                                                </div>
+                                                <div class="owl-item" style="width: 261px;">
+                                                    a href="images/single-product/s2.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+                                                    <img src="/static/images/single-product/s2.jpg" class="wp-post-image" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="owl-item" style="width: 261px;">
+                                                    <a href="images/single-product/s3.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+                                                        <img src="/static/images/single-product/s3.jpg" class="wp-post-image" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="owl-item" style="width: 261px;">
+                                                    <a href="images/single-product/s4.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+                                                        <img src="/static/images/blank.gif" data-echo="/static/images/single-product/s4.jpg" class="wp-post-image" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="owl-item" style="width: 261px;">
+                                                    <a href="images/single-product/s5.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+                                                        <img src="/static/images/blank.gif" data-echo="/static/images/single-product/s5.jpg" class="wp-post-image" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            </div>
+                                                <div class="owl-nav disabled">
+                                                    <div class="owl-prev">prev
+                                                    </div>
+                                                    <div class="owl-next">next
+                                                    </div>
+                                                </div>
+                                                <div class="owl-dots disabled">
+
+                                                </div>
+                                            </div><!-- .thumbnails-single -->
+                                            <div class="thumbnails-all columns-5 owl-carousel owl-loaded owl-drag">
+                                            <div class="owl-stage-outer">
+                                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 323px;">
+                                                    <div class="owl-item synced active" style="width: 45.8px; margin-right: 8px;">
+                                                        <a href="images/single-product/single-thumb1.jpg" class="first" title="">
+                                                            <img src="/static/images/single-product/single-thumb1.jpg" class="wp-post-image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="owl-item active" style="width: 45.8px; margin-right: 8px;">
+                                                        <a href="images/single-product/single-thumb2.jpg" class="" title="">
+                                                            <img src="/static/images/single-product/single-thumb2.jpg" class="wp-post-image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="owl-item active" style="width: 45.8px; margin-right: 8px;">
+                                                        <a href="images/single-product/single-thumb3.jpg" class="" title="">
+                                                            <img src="/static/images/single-product/single-thumb3.jpg" class="wp-post-image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="owl-item active" style="width: 45.8px; margin-right: 8px;">
+                                                        <a href="images/single-product/single-thumb4.jpg" class="" title="">
+                                                            <img src="/static/images/single-product/single-thumb4.jpg" class="wp-post-image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="owl-item active" style="width: 45.8px; margin-right: 8px;">
+                                                        <a href="images/single-product/single-thumb5.jpg" class="last" title="">
+                                                            <img src="/static/images/single-product/single-thumb5.jpg" class="wp-post-image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="owl-item" style="width: 45.8px; margin-right: 8px;">
+                                                        <a href="images/single-product/single-thumb6.jpg" class="first" title="">
+                                                            <img src="/static/images/single-product/single-thumb6.jpg" class="wp-post-image" alt="">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <div class="owl-nav disabled">
+                                                    <div class="owl-prev">prev
+                                                    </div>
+                                                    <div class="owl-next">next
+                                                    </div>
+                                                </div>
+                                                <div class="owl-dots">
+                                                    <div class="owl-dot active">
+                                                        <span>
+
+                                                        </span>
+                                                    </div>
+                                                    <div class="owl-dot">
+                                                        <span>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><!-- .thumbnails-all -->
+                                        </div><!-- .electro-gallery -->
+                                    </div><!-- /.product-images-wrapper -->
+                                    <div class="summary entry-summary">
+                                        <span class="loop-product-categories">
+                                            <a href="" rel="tag">{{ products.brand }}</a>
+                                        </span><!-- /.loop-product-categories -->
+                                        <h1 itemprop="name" class="product_title entry-title">{{ products.title }}</h1>
+                                        <div class="woocommerce-product-rating">
+                                            <br>
+                                            <div>
+                                                {{ products.short_descriptions.center }}
+                                            </div>
+                                            <br>
+                                            <a href="" class="woocommerce-review-link">(<span itemprop="reviewCount" class="count">3</span> customer reviews)</a>
+                                        </div><!-- .woocommerce-product-rating -->
+                                        <div class="brand">
+                                        </div><!-- .brand -->
+                                        <div class="availability in-stock">
+                                            Availablity: <span>In stock</span>
+                                        </div><!-- .availability -->
+                                        <hr class="single-product-title-divider">
+                                        <div class="action-buttons">
+                                            <a href="#" class="add_to_wishlist">Wishlist</a>
+                                            <a href="#" class="add-to-compare-link" data-product_id="2452">Compare</a>
+                                        </div><!-- .action-buttons -->
+                                        <div itemprop="description">
+                                            <ul>
+                                                <li>{{ products.description }}</li>
+                                            </ul>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                                            <p><strong>SKU</strong>: FW511948218</p>
+                                        </div><!-- .description -->
+                                        <div itemprop="offers" itemscope="" itemtype="http://www.mellatweb.com/Offer">
+                                            <p class="price"><span class="electro-price"><ins><span class="amount"> تومان {{ products.price }}</span></ins></span></p>
+                                            <meta itemprop="price" content="1215">
+                                            <meta itemprop="priceCurrency" content="USD">
+                                            <link itemprop="availability" href="http://www.mellatweb.com/InStock">
+                                        </div><!-- /itemprop -->
+                                        <form class="variations_form cart" method="post">
+                                            <div class="single_variation_wrap">
+                                                <div class="woocommerce-variation single_variation"></div>
+                                                <div class="woocommerce-variation-add-to-cart variations_button">
+                                                    <div class="quantity">
+                                                        <label>Quantity:</label>
+                                                        <input type="number" name="quantity" value="1" title="Qty" class="input-text qty text">
+                                                    </div>
+                                                    <button type="submit" class="single_add_to_cart_button button">Add to cart</button>
+                                                    <input type="hidden" name="add-to-cart" value="2452">
+                                                    <input type="hidden" name="product_id" value="2452">
+                                                    <input type="hidden" name="variation_id" class="variation_id" value="0">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div><!-- .summary -->
+                                </div><!-- /.single-product-wrapper -->
+                                <div class="related products">
+                                    <h2>Related Products</h2>
+                                    <ul class="products columns-5">
+                                        {% for rel_products in related_product %}
+                                            <li class="product">
+                                            <div class="product-outer" style="height: 344px;">
+                                                <div class="product-inner">
+                                                    <span class="loop-product-categories"><a href="" rel="tag">{{ rel_products.brand }}</a></span>
+                                                    <a href="">
+                                                        <h3>{{ rel_products.title }}</h3>
+                                                        <div class="product-thumbnail">
+                                                            {% thumbnail rel_products.image '250x232' crop='center' as im %}
+                                                                <img src="{{ im.url }}" alt="">
+                                                            {% endthumbnail %}
+                                                        </div>
+                                                    </a>
+                                                    <div class="price-add-to-cart">
+                                                        <span class="price">
+                                                            <span class="electro-price">
+                                                                <ins><span class="amount">{{ rel_products.price }}</span></ins>
+                                                            </span>
+                                                        </span>
+                                                        <a rel="nofollow" href="" class="button add_to_cart_button">Add to cart</a>
+                                                    </div><!-- /.price-add-to-cart -->
+                                                    <div class="hover-area">
+                                                        <div class="action-buttons">
+                                                            <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
+                                                            <a href="{% url 'product-detail-page' rel_products.slug %}" class="add-to-compare-link">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.product-inner -->
+                                            </div><!-- /.product-outer -->
+                                        </li>
+                                        {% endfor %}
+                                    </ul><!-- /.products -->
+                                </div><!-- /.related -->
+                            </div>
+                        </main><!-- /.site-main -->
+                    </div><!-- /.content-area -->
+                </div><!-- .col-full -->
+            </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="en-US" itemscope="itemscope" itemtype="http://mellatweb.com/Webpage">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+
+            {% block title %}
+            {% endblock %}
+
+        </title>
+        {% include 'shared/header_ref.html' %}
+    </head>
+
+        {% render_partial 'home.views.header_components' %}
+        {% block content %}
+
+        {% endblock %}
+        {% render_partial 'home.views.footer_components' %}<!-- #colophon -->
+
+        {% include 'shared/footer_ref.html' %}
+
+</html>
+
+

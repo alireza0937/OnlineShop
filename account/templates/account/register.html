@@ -1,0 +1,38 @@
+{% extends 'shared/base.html' %}
+{% block title %}
+    Register Page
+{% endblock %}
+{% block content %}
+        <div class="container">
+		<section id="form"><!--form-->
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="register-form"><!--login form--> <br>
+						<h2> Register :</h2>
+						<form action="{% url 'register-page' %}" method="post">
+                            {% csrf_token %}
+                            {{ form.email.label_tag }} <br>
+                            {{ form.email }}
+                            {{ form.email.errors }} <br> <br>
+                            {{ form.password.label_tag }} <br>
+                            {{ form.password }} <br> <br>
+                            {{ form.confirm_password.label_tag }} <br>
+                            {{ form.confirm_password }} <br>
+                            {{ form.confirm_password.errors }} <br> <br>
+
+							<span>
+								<a href="{% url 'login-page' %}">Already have an Acoount(Sign in)</a>
+							</span> <br> <br>
+							<button type="submit" class="btn btn-default">Register</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+				<div class="col-sm-4">
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}
+
+
+

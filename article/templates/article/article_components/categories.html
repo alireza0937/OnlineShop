@@ -1,0 +1,8 @@
+<aside class="widget widget_categories">
+    <h3 class="widget-title">Categories</h3>
+    <ul>
+        {% for cat in categories %}
+            <li class="cat-item"><a href="{% url 'blog-list-by-categories-page' cat.url_title %}"><span class="no-child"></span>{{ cat.url_title }}</a></li>
+        {% endfor %}
+    </ul>
+</aside>
