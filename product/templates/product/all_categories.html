@@ -1,0 +1,42 @@
+{% extends 'shared/base.html' %}
+{% block title %}
+    All Categories
+{% endblock %}
+{% block content %}
+    <body class="page page-template-default">
+        <div tabindex="-1" class="site-content" id="content">
+                <div class="container">
+                    <br>
+                    <div class="content-area" id="primary">
+                        <main class="site-main" id="main">
+                            <article class="page type-page status-publish hentry">
+                                <header class="entry-header">
+                                    <h1 itemprop="name" class="entry-title">Store Directory</h1>
+                                </header><!-- .entry-header -->
+                                <div itemprop="mainContentOfPage" class="entry-content">
+                                    <div class="electro-store-directory">
+                                        <hr class="no-margin">
+                                        <div class="widget woocommerce widget_product_categories">
+                                            <ul>
+                                                {% for maincat in main_categories %}
+                                                    <li class="cat-ite cat-parent"><a href="{% url 'product-by-categories-page' maincat.url_title %}"><span class="child-indicator open"><i class="fa fa-angle-up"></i></span>{{ maincat.url_title }}</a>
+                                                    <ul class="children" style="display: none;">
+                                                        {% for sub_cat in maincat.productcategory_set.all %}
+                                                            <li class="cat-item"><a href="{% url 'product-by-categories-page' sub_cat.url_title %}"><span class="no-child"></span><span class="no-child"></span>{{ sub_cat.url_title }}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    </li>
+                                                {% endfor %}
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div><!-- .entry-content -->
+                            </article><!-- #post-## -->
+                        </main><!-- #main -->
+                    </div><!-- #primary -->
+                </div><!-- .col-full -->
+            </div>
+    </body>
+{% endblock %}

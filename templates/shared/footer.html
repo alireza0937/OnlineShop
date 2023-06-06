@@ -1,4 +1,5 @@
-
+{% load thumbnail %}
+{% load tags %}
 <footer id="colophon" class="site-footer">
                 <div class="footer-widgets">
                     <div class="container">
@@ -6,61 +7,19 @@
                             <div class="col-lg-4 col-md-4 col-xs-12">
                                 <aside class="widget clearfix">
                                     <div class="body">
-                                        <h4 class="widget-title">Featured Products</h4>
+                                        <h4 class="widget-title">New Products</h4>
                                         <ul class="product_list_widget">
-                                            <li>
-                                                <a href="" title="Tablet Thin EliteBook  Revolve 810 G6">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/1.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Tablet Thin EliteBook  Revolve 810 G6</span>
+                                            {% for products in new_product %}
+                                                <li>
+                                                <a href="{% url 'product-detail-page' products.slug %}" title="{{ products.title }}">
+                                                    {% thumbnail products.image '180x180' crop='center' as im %}
+                                                        <img class="wp-post-image" data-echo="{{ im.url }}" src="/static/images/blank.gif" alt="">
+                                                    {% endthumbnail %}
+                                                    <span class="product-title">{{ products.title }}</span>
                                                 </a>
-                                                <span class="electro-price"><span class="amount">&#36;1,300.00</span></span>
+                                                <span class="electro-price"><span class="amount"> {{ products.price | three_digits_show  }}</span></span>
                                             </li>
-
-                                            <li>
-                                                <a href="" title="Smartphone 6S 128GB LTE">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/2.jpg" src="/static/images/blank.gif" alt=""><span class="product-title">Smartphone 6S 128GB LTE</span>
-                                                </a>
-                                                <span class="electro-price"><span class="amount">&#36;780.00</span></span>
-                                            </li>
-
-                                            <li>
-                                                <a href="" title="Smartphone 6S 64GB LTE">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/3.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Smartphone 6S 64GB LTE</span>
-                                                </a>
-                                                <span class="electro-price"><span class="amount">&#36;1,215.00</span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </aside>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-xs-12">
-                                <aside class="widget clearfix">
-                                    <div class="body"><h4 class="widget-title">Onsale Products</h4>
-                                        <ul class="product_list_widget">
-                                            <li>
-                                                <a href="" title="Notebook Black Spire V Nitro  VN7-591G">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/3.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Notebook Black Spire V Nitro  VN7-591G</span>
-                                                </a>
-                                                <span class="electro-price"><ins><span class="amount">&#36;1,999.00</span></ins> <del><span class="amount">&#36;2,299.00</span></del></span>
-                                            </li>
-
-                                            <li>
-                                                <a href="" title="Tablet Red EliteBook  Revolve 810 G2">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/4.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Tablet Red EliteBook  Revolve 810 G2</span>
-                                                </a>
-                                                <span class="electro-price"><ins><span class="amount">&#36;1,999.00</span></ins> <del><span class="amount">&#36;2,299.00</span></del></span>
-                                            </li>
-
-                                            <li>
-                                                <a href="" title="Widescreen 4K SUHD TV">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/5.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Widescreen 4K SUHD TV</span>
-                                                </a>
-                                                <span class="electro-price"><ins><span class="amount">&#36;2,999.00</span></ins> <del><span class="amount">&#36;3,299.00</span></del></span>
-                                            </li>
+                                            {% endfor %}
                                         </ul>
                                     </div>
                                 </aside>
@@ -68,31 +27,51 @@
                             <div class="col-lg-4 col-md-4 col-xs-12">
                                 <aside class="widget clearfix">
                                     <div class="body">
-                                        <h4 class="widget-title">Top Rated Products</h4>
+                                        <h4 class="widget-title">inexpensive Products</h4>
                                         <ul class="product_list_widget">
-                                            <li>
-                                                <a href="" title="Notebook Black Spire V Nitro  VN7-591G">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/6.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Notebook Black Spire V Nitro  VN7-591G</span>
+                                            {% for products in inexpensive_product %}
+                                                <li>
+                                                <a href="{% url 'product-detail-page' products.slug %}" title="{{ products.title }}">
+                                                    {% thumbnail products.image '180x180' crop='center' as im %}
+                                                        <img class="wp-post-image" data-echo="{{ im.url }}" src="/static/images/blank.gif" alt="">
+                                                    {% endthumbnail %}
+                                                    <span class="product-title">{{ products.title }}</span>
                                                 </a>
-                                                <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>		<span class="electro-price"><ins><span class="amount">&#36;1,999.00</span></ins> <del><span class="amount">&#36;2,299.00</span></del></span>
+                                                <span class="electro-price"><ins><span class="amount">  {{products.price |three_digits_show}}</span></ins> <del><span class="amount"></span></del></span>
                                             </li>
+                                            {% endfor %}
 
-                                            <li>
-                                                <a href="" title="Apple MacBook Pro MF841HN/A 13-inch Laptop">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/7.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Apple MacBook Pro MF841HN/A 13-inch Laptop</span>
+                                        </ul>
+                                    </div>
+                                </aside>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <aside class="widget clearfix">
+                                    <div class="body">
+                                        <h4 class="widget-title">Discount Product</h4>
+                                        <ul class="product_list_widget">
+                                            {% for products in discount_product %}
+                                                <li>
+                                                <a href="{% url 'product-detail-page' products.slug %}" title="{{ products.title }}">
+                                                    {% thumbnail products.image '180x180' crop='center' as im %}
+                                                        <img class="wp-post-image" data-echo="{{ im.url }}" src="/static/images/blank.gif" alt="">
+                                                    {% endthumbnail %}
+                                                    <span class="product-title">{{ products.title }}</span>
                                                 </a>
-                                                <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>		<span class="electro-price"><span class="amount">&#36;1,800.00</span></span>
-                                            </li>
 
-                                            <li>
-                                                <a href="" title="Tablet White EliteBook Revolve  810 G2">
-                                                    <img class="wp-post-image" data-echo="/static/images/footer/2.jpg" src="/static/images/blank.gif" alt="">
-                                                    <span class="product-title">Tablet White EliteBook Revolve  810 G2</span>
-                                                </a>
-                                                <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>		<span class="electro-price"><span class="amount">&#36;1,999.00</span></span>
+                                                        <ins>
+                                                            <br>
+                                                            <span class="amount">  {{ products.calculate_price | three_digits_show }}
+                                                            </span>
+                                                        </ins>
+                                                        <br>
+                                                        <del>
+                                                            <span class="amount">  {{products.price | three_digits_show}}
+                                                            </span>
+                                                        </del>
+
                                             </li>
+                                            {% endfor %}
                                         </ul>
                                     </div>
                                 </aside>
@@ -115,7 +94,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Enter your email address">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-secondary" type="button">Sign Up</button>
+                                            <a href="{% url 'register-page' %}" class="btn btn-secondary" type="button">Sign Up</a>
                                         </span>
                                     </div>
                                 </form>
@@ -134,13 +113,9 @@
                                             <h4 class="widget-title">Find It Fast</h4>
                                             <div class="menu-footer-menu-1-container">
                                                 <ul id="menu-footer-menu-1" class="menu">
-                                                    <li class="menu-item"><a href="">Laptops &#038; Computers</a></li>
-                                                    <li class="menu-item"><a href="">Cameras &#038; Photography</a></li>
-                                                    <li class="menu-item"><a href="">Smart Phones &#038; Tablets</a></li>
-                                                    <li class="menu-item"><a href="">Video Games &#038; Consoles</a></li>
-                                                    <li class="menu-item"><a href="">TV &#038; Audio</a></li>
-                                                    <li class="menu-item"><a href="">Gadgets</a></li>
-                                                    <li class="menu-item "><a href="">Car Electronic &#038; GPS</a></li>
+                                                    {% for categories in all_categories %}
+                                                        <li class="menu-item"><a href="{% url 'product-by-categories-page' categories.url_title %}">{{ categories.url_title }}</a></li>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                         </div>
@@ -153,10 +128,9 @@
                                             <h4 class="widget-title">&nbsp;</h4>
                                             <div class="menu-footer-menu-2-container">
                                                 <ul id="menu-footer-menu-2" class="menu">
-                                                    <li class="menu-item"><a href="">Printers &#038; Ink</a></li>
-                                                    <li class="menu-item "><a href="">Software</a></li>
-                                                    <li  class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2742"><a href="">Office Supplies</a></li>
-                                                    <li  class="menu-item "><a href="">Computer Components</a></li>
+                                                    {% for brands in all_brands %}
+                                                        <li class="menu-item"><a href="{% url 'product-by-brands-page' brands.url_title %}">{{ brands.url_title }}</a></li>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                         </div>
@@ -174,7 +148,7 @@
                                                     <li class="menu-item"><a href="">Wishlist</a></li>
                                                     <li class="menu-item"><a href="">Customer Service</a></li>
                                                     <li class="menu-item"><a href="">Returns/Exchange</a></li>
-                                                    <li class="menu-item"><a href="">FAQs</a></li>
+                                                    <li class="menu-item"><a href="{% url 'faq-page' %}">FAQs</a></li>
                                                     <li class="menu-item"><a href="h">Product Support</a></li>
                                                 </ul>
                                             </div>
@@ -264,18 +238,8 @@
 
                 <div class="copyright-bar">
                     <div class="container">
-                        <div class="pull-left flip copyright">&copy; <a href="http://demo2.transvelo.in/html/electro/">Electro</a> - All Rights Reserved</div>
-                        <div class="pull-right flip payment">
-                            <div class="footer-payment-logo">
-                                <ul class="cash-card card-inline">
-                                    <li class="card-item"><img src="/static/images/footer/payment-icon/1.png" alt="" width="52"></li>
-                                    <li class="card-item"><img src="/static/images/footer/payment-icon/2.png" alt="" width="52"></li>
-                                    <li class="card-item"><img src="/static/images/footer/payment-icon/3.png" alt="" width="52"></li>
-                                    <li class="card-item"><img src="/static/images/footer/payment-icon/4.png" alt="" width="52"></li>
-                                    <li class="card-item"><img src="/static/images/footer/payment-icon/5.png" alt="" width="52"></li>
-                                </ul>
-                            </div><!-- /.payment-methods -->
-                        </div>
+                        <div class="pull-left flip copyright">&copy; <strong>Electro</strong>- All Rights Reserved</div>
+
                     </div><!-- /.container -->
                 </div><!-- /.copyright-bar -->
             </footer><!-- #colophon -->

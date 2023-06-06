@@ -18,3 +18,12 @@ class RegisterForm(forms.Form):
 class LoginForm(forms.Form):
     email = forms.EmailField(label='E-Mail Address')
     password = forms.CharField(label='password')
+
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField()
+
+
+class ChangePasswordForm(forms.Form):
+    new_password = forms.CharField(max_length=100)
+    repeat_new_password = forms.CharField(max_length=100)

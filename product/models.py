@@ -34,11 +34,17 @@ class Product(models.Model):
     category = models.ManyToManyField(ProductCategory)
     image = models.ImageField(upload_to='product/')
     short_descriptions = models.CharField(max_length=500, null=True, db_index=True)
-    price = models.CharField(max_length=250)
+    price = models.BigIntegerField()
     description = models.TextField()
     slug = models.SlugField(unique=True, editable=False, db_index=True, max_length=200)
     is_new = models.BooleanField()
     is_active = models.BooleanField()
+    Discounted = models.BooleanField(default=False)
+    discount_percent = models.FloatField(default=0)
+
+    def calculate_price(self):
+        the_final_amount = self.price - (self.discount_percent * self.price)
+        return int(the_final_amount)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

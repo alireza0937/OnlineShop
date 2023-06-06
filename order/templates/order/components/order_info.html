@@ -1,0 +1,38 @@
+{% load tags %}
+{% load thumbnail %}
+<ul class="navbar-mini-cart navbar-nav animate-dropdown nav pull-right flip">
+            {% if not empty %}
+                <li class="nav-item dropdown">
+                    <a href="" class="nav-link" data-toggle="dropdown">
+                        <i class="ec ec-shopping-bag"></i>
+                        <span class="cart-items-count count">{{ all_product.count }}</span>
+                        <span class="cart-items-total-price total-price"><span class="amount">{{ total_price | three_digits_show }}</span></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-mini-cart">
+                        <li>
+                            <div class="widget_shopping_cart_content">
+                                <ul class="cart_list product_list_widget ">
+                                    {% for products in all_product %}
+                                        <li class="mini_cart_item">
+                                        <a title="Remove this item" class="remove" href="#">×</a>
+                                        <a href="{% url 'product-detail-page' products.product.slug %}">
+                                            {% thumbnail products.product.image '180x180' crop='center' as im %}
+                                                <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="{{ im.url }}" alt="">{{ products.product.title }}
+                                            {% endthumbnail %}
+                                        </a>
+                                        <span class="quantity">{{ products.count }} × <span class="amount">{{ products.product.price | three_digits_show }}</span></span>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul><!-- end product list -->
+                                <p class="total"><strong>Subtotal:</strong> <span class="amount">£969.98</span></p>
+                                <p class="buttons">
+                                    <a class="button wc-forward" href="{% url 'user-cart-page' %}">View Cart</a>
+                                    <a class="button checkout wc-forward" href="">Checkout</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+            </ul>

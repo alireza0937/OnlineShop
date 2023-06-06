@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 from home.forms import ContactUsModelForm
-from product.models import ProductVisit, Product
+from product.models import ProductVisit, Product, ProductCategory, ProductBrand
 from sitesetting.models import SliderSetting, Advertising
 
 
@@ -26,6 +26,15 @@ class HomeView(TemplateView):
         context['adv_last_sec'] = Advertising.objects.filter(position__iexact=Advertising.BannerPosition.home,
                                                              title='لست سکند').first()
         context['microsoft_products'] = Product.objects.filter(brand__url_title__iexact='microsoft').all()
+        data = dict()
+        categories = ProductCategory.objects.filter(is_active=True, Parent=None).all()[:3]
+        for cat in categories:
+            pro = list()
+            for product in Product.objects.filter(is_active=True, category__url_title=cat.url_title).all()[:4]:
+                pro.append(product)
+            data[cat] = pro
+        context['product_by_category'] = data
+
         return context
 
 
@@ -34,7 +43,19 @@ def header_components(request):
 
 
 def footer_components(request):
-    return render(request, 'shared/footer.html')
+    new_product = Product.objects.filter(is_new=True, is_active=True).all()[:3]
+    inexpensive_product = Product.objects.filter(is_active=True).all().order_by('price')[:3]
+    discount_product = Product.objects.filter(is_active=True, Discounted=True).all()[:3]
+    all_categories = ProductCategory.objects.filter(Parent=None)[:7]
+    all_brands = ProductBrand.objects.all()[:5]
+    return render(request, 'shared/footer.html', context={
+        'new_product': new_product,
+        'inexpensive_product': inexpensive_product,
+        'discount_product': discount_product,
+        'all_categories': all_categories,
+        'all_brands': all_brands,
+
+    })
 
 
 def about_us(request: HttpRequest):
@@ -57,3 +78,7 @@ class ContactUs(View):
         return render(request, 'home/contactus.html', context={
             'form': user_comment
         })
+
+
+def faq(request):
+    return render(request, 'home/faq.html')

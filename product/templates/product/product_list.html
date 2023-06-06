@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load thumbnail %}
+{% load tags %}
 {% load render_partial %}
 {% block title %}
 Product List
@@ -24,22 +25,24 @@ Product List
 
                                                 <h3>{{ product.title }}</h3>
                                                 <div class="product-thumbnail">
+                                                    <a href="{% url 'product-detail-page' product.slug %}">
                                                     {% thumbnail product.image '250x232' crop='center' as im %}
                                                         <img src="{{ im.url }}" alt="">
                                                     {% endthumbnail %}
+                                                    </a>
                                                 </div>
 
                                             <div class="price-add-to-cart">
                                                 <span class="price">
                                                     <span class="electro-price">
-                                                        <ins><span class="amount">{{ product.price}} تومان</span></ins>
+                                                        <ins><span class="amount">{{ product.price | three_digits_show }} </span></ins>
                                                     </span>
                                                 </span>
                                                 <a rel="nofollow" href="" class="button add_to_cart_button">Add to cart</a>
                                             </div><!-- /.price-add-to-cart -->
                                             <div class="hover-area">
                                                 <div class="action-buttons">
-                                                    <a href="{% url 'product-detail-page' product.slug %}" rel="nofollow">More Details</a>
+                                                    <a href="" rel="nofollow">Add wishlist</a>
                                                     <a href="#" class="add-to-compare-link">Compare</a>
                                                 </div>
                                             </div>

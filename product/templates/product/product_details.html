@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load thumbnail %}
+{% load tags %}
 {% block title %}
     {{ products.title }}
 {% endblock %}
@@ -18,7 +19,7 @@
                                             <div class="thumbnails-single owl-carousel owl-loaded owl-drag">
                                             <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1566px;">
                                                 <div class="owl-item active" style="width: 261px;">
-                                                    <a href="images/single-product/s1-1.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+                                                    <a href="/static/images/single-product/s1-1.jpg" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
                                                         {% thumbnail products.image '600x600' crop='center' as im %}
                                                             <img src="{{ im.url }}" class="wp-post-image" alt="">
                                                         {% endthumbnail %}
@@ -135,7 +136,7 @@
                                         </div><!-- .availability -->
                                         <hr class="single-product-title-divider">
                                         <div class="action-buttons">
-                                            <a href="#" class="add_to_wishlist">Wishlist</a>
+                                            <button onclick="add_to_wishlist({{ products.id }}, '{{ products.slug }}')" class="add_to_wishlist">add Wishlist</button>
                                             <a href="#" class="add-to-compare-link" data-product_id="2452">Compare</a>
                                         </div><!-- .action-buttons -->
                                         <div itemprop="description">
@@ -146,26 +147,26 @@
                                             <p><strong>SKU</strong>: FW511948218</p>
                                         </div><!-- .description -->
                                         <div itemprop="offers" itemscope="" itemtype="http://www.mellatweb.com/Offer">
-                                            <p class="price"><span class="electro-price"><ins><span class="amount"> تومان {{ products.price }}</span></ins></span></p>
+                                            <p class="price"><span class="electro-price"><ins><span class="amount">  {{ products.price | three_digits_show  }}</span></ins></span></p>
                                             <meta itemprop="price" content="1215">
                                             <meta itemprop="priceCurrency" content="USD">
                                             <link itemprop="availability" href="http://www.mellatweb.com/InStock">
                                         </div><!-- /itemprop -->
-                                        <form class="variations_form cart" method="post">
+
                                             <div class="single_variation_wrap">
                                                 <div class="woocommerce-variation single_variation"></div>
                                                 <div class="woocommerce-variation-add-to-cart variations_button">
                                                     <div class="quantity">
                                                         <label>Quantity:</label>
-                                                        <input type="number" name="quantity" value="1" title="Qty" class="input-text qty text">
+                                                        <input type="number" id="count" name="quantity" value="1" title="Qty" class="input-text qty text">
                                                     </div>
-                                                    <button type="submit" class="single_add_to_cart_button button">Add to cart</button>
+                                                    <button type="submit" onclick="add_to_order_basket({{ products.id }})" class="single_add_to_cart_button button">Add to cart</button>
                                                     <input type="hidden" name="add-to-cart" value="2452">
                                                     <input type="hidden" name="product_id" value="2452">
                                                     <input type="hidden" name="variation_id" class="variation_id" value="0">
                                                 </div>
                                             </div>
-                                        </form>
+
                                     </div><!-- .summary -->
                                 </div><!-- /.single-product-wrapper -->
                                 <div class="related products">
@@ -187,14 +188,15 @@
                                                     <div class="price-add-to-cart">
                                                         <span class="price">
                                                             <span class="electro-price">
-                                                                <ins><span class="amount">{{ rel_products.price }}</span></ins>
+                                                                <ins><span class="amount">{{ rel_products.price |three_digits_show }}</span></ins>
                                                             </span>
                                                         </span>
                                                         <a rel="nofollow" href="" class="button add_to_cart_button">Add to cart</a>
                                                     </div><!-- /.price-add-to-cart -->
                                                     <div class="hover-area">
                                                         <div class="action-buttons">
-                                                            <a href="#" rel="nofollow" class="add_to_wishlist"> Wishlist</a>
+                                                            <button onclick="add_to_wishlist({{ product.id }}, {{ product.slug }})" class="add_to_wishlist">add Wishlist</button>
+{#                                                            <a onclick="add_to_wishlist({{ product.id }}, {{ product.slug }})" rel="nofollow" class="add_to_wishlist"> Wishlist</a>#}
                                                             <a href="{% url 'product-detail-page' rel_products.slug %}" class="add-to-compare-link">Details</a>
                                                         </div>
                                                     </div>

@@ -6,15 +6,23 @@
         <div class="container">
             <nav>
                 <ul id="menu-top-bar-left" class="nav nav-inline pull-left animate-dropdown flip">
-                    <li class="menu-item animate-dropdown"><a title="Welcome to Worldwide Electronics Store" href="#">Welcome to Worldwide Electronics Store</a></li>
+                    <li class="menu-item animate-dropdown">
+                        Welcome to Worldwide Electronics Store
+                    </li>
                 </ul>
             </nav>
             <nav>
                 <ul id="menu-top-bar-right" class="nav nav-inline pull-right animate-dropdown flip">
-                    <li class="menu-item animate-dropdown"><a title="Store Locator" href="#"><i class="ec ec-map-pointer"></i>Store Locator</a></li>
-                    <li class="menu-item animate-dropdown"><a title="Track Your Order" href=""><i class="ec ec-transport"></i>Track Your Order</a></li>
-                    <li class="menu-item animate-dropdown"><a title="Shop" href=""><i class="ec ec-shopping-bag"></i>Shop</a></li>
-                    <li class="menu-item animate-dropdown"><a title="My Account" href=""><i class="ec ec-user"></i>My Account</a></li>
+
+
+                    <li class="menu-item animate-dropdown"><a title="Shop" href="{% url 'all-categories-page' %}"><i class="ec ec-shopping-bag"></i>Shop</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="menu-item animate-dropdown"><a title="My Account" href="{% url 'dashboard-page' %}"><i class="ec ec-user"></i>My Account</a></li>
+                        <li class="menu-item animate-dropdown"><a title="My Account" href="{% url 'logout' %}"><i class="ec ec-user"></i>Logout</a></li>
+                    {% else %}
+                        <li class="menu-item animate-dropdown"><a title="My Account" href="{% url 'register-page' %}"><i class="ec ec-user"></i>Register</a></li>
+                        <li class="menu-item animate-dropdown"><a title="My Account" href="{% url 'login-page' %}"><i class="ec ec-user"></i>Login</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
@@ -115,62 +123,22 @@
                             <div class="input-group-addon search-categories">
                             </div>
                             <div class="input-group-btn">
-                                <button type="submit"  class="btn btn-secondary"><i class="ec ec-search"></i></button>
+                                <button type="submit"  class="btn btn-secondary">
+                                    <i class="ec ec-search"></i>
+                                </button>
                             </div>
                     </div>
             </div>
     </form>
-            <ul class="navbar-mini-cart navbar-nav animate-dropdown nav pull-right flip">
-                <li class="nav-item dropdown">
-                    <a href="" class="nav-link" data-toggle="dropdown">
-                        <i class="ec ec-shopping-bag"></i>
-                        <span class="cart-items-count count">4</span>
-                        <span class="cart-items-total-price total-price"><span class="amount">$1,215.00</span></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-mini-cart">
-                        <li>
-                            <div class="widget_shopping_cart_content">
-                                <ul class="cart_list product_list_widget ">
-                                    <li class="mini_cart_item">
-                                        <a title="Remove this item" class="remove" href="#">×</a>
-                                        <a href="">
-                                            <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="/static/images/products/mini-cart1.jpg" alt="">White lumia 9001&nbsp;
-                                        </a>
-                                        <span class="quantity">2 × <span class="amount">£150.00</span></span>
-                                    </li>
-                                    <li class="mini_cart_item">
-                                        <a title="Remove this item" class="remove" href="#">×</a>
-                                        <a href="">
-                                            <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="/static/images/products/mini-cart2.jpg" alt="">PlayStation 4&nbsp;
-                                        </a>
-                                        <span class="quantity">1 × <span class="amount">£399.99</span></span>
-                                    </li>
-                                    <li class="mini_cart_item">
-                                        <a data-product_sku="" data-product_id="34" title="Remove this item" class="remove" href="#">×</a>
-                                        <a href="">
-                                        <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="/static/images/products/mini-cart3.jpg" alt="">POV Action Cam HDR-AS100V&nbsp;
-                                        </a>
-                                        <span class="quantity">1 × <span class="amount">£269.99</span></span>
-                                    </li>
-                                </ul><!-- end product list -->
-                                <p class="total"><strong>Subtotal:</strong> <span class="amount">£969.98</span></p>
-                                <p class="buttons">
-                                    <a class="button wc-forward" href="">View Cart</a>
-                                    <a class="button checkout wc-forward" href="">Checkout</a>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+           {% render_partial 'order.views.show_all_orders' %}
             <ul class="navbar-wishlist nav navbar-nav pull-right flip">
                 <li class="nav-item">
-                    <a href="" class="nav-link"><i class="ec ec-favorites"></i></a>
+                    <a href="{% url 'show-wishlist' %}" class="nav-link"><i class="ec ec-favorites"></i></a>
                 </li>
             </ul>
             <ul class="navbar-compare nav navbar-nav pull-right flip">
                 <li class="nav-item">
-                    <a href="" class="nav-link"><i class="ec ec-compare"></i></a>
+
                 </li>
             </ul>
         </div>

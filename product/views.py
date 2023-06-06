@@ -1,7 +1,7 @@
 from django.db.models import Count
 from django.http import HttpRequest
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from product.models import Product, ProductCategory, ProductBrand, ProductVisit
 from sitesetting.models import Advertising
 
@@ -37,8 +37,10 @@ class ProductListView(ListView):
 
 
 def product_detail(request: HttpRequest, slug):
+    user = request.user.id
     chosen_product = Product.objects.filter(slug=slug).first()
-    if request.user.id is not None:
+
+    if user is not None:
         visit = ProductVisit(product_id=chosen_product.id, user_id=request.user.id)
         visit.save()
     else:
@@ -63,3 +65,12 @@ def product_brands(request: HttpRequest):
     return render(request, 'product/components/brand.html', context={
         'all_brands': all_brands
     })
+
+
+class AllCategories(TemplateView):
+    template_name = 'product/all_categories.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AllCategories, self).get_context_data()
+        context['main_categories'] = ProductCategory.objects.filter(Parent=None).all()
+        return context

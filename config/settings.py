@@ -25,11 +25,19 @@ INSTALLED_APPS = [
     'product',
     'sorl.thumbnail',
     'article',
-    'sitesetting'
+    'sitesetting',
+    'userpanel',
+    'compare',
+    'polls',
+    'wishlist',
+    'order',
+    'discount',
+    'payment',
+
 
 
 ]
-
+LOGIN_URL = 'login-page'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

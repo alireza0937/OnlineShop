@@ -25,5 +25,19 @@
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/userpanel/templates" />
+        <option value="$MODULE_DIR$/account/templates" />
+        <option value="$MODULE_DIR$/article/templates" />
+        <option value="$MODULE_DIR$/home/templates" />
+        <option value="$MODULE_DIR$/product/templates" />
+        <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/compare/templates" />
+        <option value="$MODULE_DIR$/wishlist/templates" />
+        <option value="$MODULE_DIR$/order/templates" />
+        <option value="$MODULE_DIR$/payment/templates" />
+      </list>
+    </option>
   </component>
 </module>

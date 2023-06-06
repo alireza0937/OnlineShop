@@ -1,0 +1,85 @@
+{% extends 'shared/base.html' %}
+{% load tags %}
+
+{% block title %}
+    CheckOut
+{% endblock %}
+
+
+{% block content %}
+    <body class="page home page-template-default">
+        <div id="content" class="site-content" tabindex="-1">
+            <br><br><br>
+                <div class="container">
+                    <div id="primary" class="content-area">
+                        <main id="main" class="site-main">
+                            <article class="page type-page status-publish hentry">
+                                <header class="entry-header"><h1 itemprop="name" class="entry-title">Checkout</h1></header><!-- .entry-header -->
+
+
+                                    <h3 id="order_review_heading">Your order</h3>
+
+                                    <div class="woocommerce-checkout-review-order" id="order_review">
+                                        <table class="shop_table woocommerce-checkout-review-order-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-name">Product</th>
+                                                    <th class="product-total">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for products in all_orders %}
+                                                <tr class="cart_item">
+                                                    <td class="product-name">
+                                                        {{ products.product.title }}&nbsp;
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">{{ products.final_price | three_digits_show }}</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                            <tfoot>
+
+                                                <tr class="cart-subtotal">
+                                                    <th>Subtotal</th>
+                                                    <td><span class="amount">{{ total_price | three_digits_show }}</span></td>
+                                                </tr>
+
+                                                <tr class="shipping">
+                                                    <th>Shipping</th>
+                                                    <td data-title="Shipping"><span class="amount">{{ 50000 | three_digits_show }}</span>
+                                                        <input type="hidden" class="shipping_method" value="international_delivery" id="shipping_method_0" data-index="0" name="shipping_method[0]"></td>
+                                                </tr>
+
+                                                <tr class="order-total">
+                                                    <th>Total</th>
+                                                    <td><strong><span class="amount">{% Sum total_price 50000 %}</span></strong> </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        <form enctype="multipart/form-data" action="{% url 'checkout-page' %}" class="checkout woocommerce-checkout" method="post" name="checkout">
+                                            {% csrf_token %}
+                                            <div class="woocommerce-checkout-payment" id="payment">
+                                            <ul class="wc_payment_methods payment_methods methods">
+                                               {{ form.choices.label_tag }}
+                                               {{ form.choices }}
+                                                <a href="{% url 'terms-and-conditions-page' %}">{{ form.terms_and_condition.label_tag }}</a>
+                                               {{ form.terms_and_condition }}
+                                            </ul>
+                                            <div class="form-row place-order">
+
+                                                <input type="submit" data-value="Place order" value="Place order" class="button alt">
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+
+                            </article>
+                        </main><!-- #main -->
+                    </div><!-- #primary -->
+                </div><!-- .container -->
+            </div>
+    </body>
+{% endblock %}
