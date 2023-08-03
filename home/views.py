@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
+from account.models import User
 from home.forms import ContactUsModelForm
 from product.models import ProductVisit, Product, ProductCategory, ProductBrand
 from sitesetting.models import SliderSetting, Advertising

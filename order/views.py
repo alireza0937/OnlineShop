@@ -136,7 +136,6 @@ def remove_product_from_order_list(request: HttpRequest):
 
 def show_all_orders(request: HttpRequest):
     user = Order.objects.filter(is_paid=False, user_id=request.user.id).first()
-    print(user)
     empty = False
     if user is not None:
         total_price = user.calculate_basket_total_price()

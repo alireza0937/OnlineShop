@@ -1,8 +1,6 @@
 from datetime import datetime
-
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import render
 from django.views import View
 
 from order.models import Order, OrderDetail
@@ -29,8 +27,6 @@ class CheckoutView(View):
         })
 
     def post(self, request: HttpRequest):
-        message = False
-        print(request.POST)
         payment_form = PaymentForm(request.POST)
         if payment_form.is_valid():
             user_order = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
@@ -38,6 +34,5 @@ class CheckoutView(View):
             user_order.is_paid = True
             user_order.payment_date = datetime.today()
             user_order.save()
-            message = True
             return render(request, 'payment/payment_response.html')
         return HttpResponse("Wrong Information.")
